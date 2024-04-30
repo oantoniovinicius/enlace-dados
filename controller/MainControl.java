@@ -20,6 +20,7 @@ public class MainControl implements Initializable {
     @FXML private Button voltar;
     @FXML private Button sendButton;
     @FXML private ChoiceBox<String> optionsBox;
+    @FXML private ChoiceBox<String> enlaceBox;
 
     @FXML private TextArea outputText;
     @FXML private TextArea inputText;
@@ -56,6 +57,7 @@ public class MainControl implements Initializable {
 
     //Instanciando a string que vai receber a opcao selecionada no choiceBox
     private String selectedMethod = "";
+    private String selectedEnquad = "";
     String comparationSignal = "1";
     int comparationBinary = 0;
 
@@ -65,6 +67,7 @@ public class MainControl implements Initializable {
     private ImageView transitionImgs[];
 
     private int option;
+    private int enquadOption;
     private int lastBit = 0; 
     int NumCaracteres = 0;
 
@@ -73,12 +76,21 @@ public class MainControl implements Initializable {
       selectedMethod = optionsBox.getSelectionModel().getSelectedItem();
     }
 
+    @FXML
+    void enlaceList(ActionEvent event) {
+      selectedEnquad = enlaceBox.getSelectionModel().getSelectedItem();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       optionsBox.getItems().addAll("Cod. Binaria", "Cod. Manchester", "Cod. Manchester Diferencial");
-
       //adiciona listeners para as ChoiceBox
       optionsBox.setOnAction(event -> optionsList(event));
+
+      enlaceBox.getItems().addAll("Contagem de caracteres", "Insercao de bytes", "Insercao de bits", "Violacao da Camada Fisica");
+
+      //adiciona listeners para as ChoiceBox
+      enlaceBox.setOnAction(event -> enlaceList(event));
 
       executionScreenImage.setVisible(false);
       inputText.setVisible(false);
@@ -119,9 +131,11 @@ public class MainControl implements Initializable {
   ****************************************************************** */
   @FXML
   void startButton(ActionEvent event) {
-    if (!selectedMethod.isEmpty()) { //verifica se o usuario escolheu alguma opcao
+    if (!selectedMethod.isEmpty() && !selectedEnquad.isEmpty()) { //verifica se o usuario escolheu alguma opcao
       optionsBox.setVisible(false);
       optionsBox.setDisable(true);
+      enlaceBox.setVisible(false);
+      enlaceBox.setDisable(true);
       iniciar.setVisible(false);
       iniciar.setDisable(true);
       
@@ -181,6 +195,8 @@ public class MainControl implements Initializable {
     startScreenImage.setVisible(true);
     optionsBox.setVisible(true);
     optionsBox.setDisable(false);
+    enlaceBox.setVisible(true);
+    enlaceBox.setDisable(false);
     iniciar.setVisible(true);
     iniciar.setDisable(false);
 
@@ -221,6 +237,27 @@ public class MainControl implements Initializable {
       System.out.println("Deu ruim!");
     }
     return option;
+  }//fim do metodo getPosition()
+
+    /********************************************************************
+  * Metodo: getCodificacao()
+  * Funcao: atribui valores inteiros para as opcoes de codificao escolhida pelo usuario 
+  * Parametros: nenhum
+  * Retorno: int option = opcao escolhida
+  ****************************************************************** */
+  public int getEnquad(){
+    if(selectedEnquad == "Contagem de caracteres"){
+      enquadOption = 0;
+    } else if(selectedEnquad == "Insercao de bytes") {
+      enquadOption = 1;
+    } else if (selectedEnquad == "Insercao de bits"){
+      enquadOption = 2;
+    } else if (selectedEnquad ==  "Violacao da Camada Fisica"){
+      enquadOption = 3;
+    } else {
+      System.out.println("Deu ruim!");
+    }
+    return enquadOption;
   }//fim do metodo getPosition()
   
   public void setNumCaracteres(int numCaracteres) {

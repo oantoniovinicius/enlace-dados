@@ -170,11 +170,16 @@
                   <Image url="@../img/startScreen.png" />    
                </image>
             </ImageView>
-            <ChoiceBox fx:id="optionsBox" layoutX="350.0" layoutY="325.0" onDragDetected="#optionsList" prefHeight="42.0" prefWidth="201.0" stylesheets="@../img/style.css">
+            <ChoiceBox fx:id="optionsBox" layoutX="355.0" layoutY="291.0" onDragDetected="#optionsList" prefHeight="42.0" prefWidth="194.0" stylesheets="@../img/style.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></ChoiceBox>
-            <Button fx:id="iniciar" layoutX="363.0" layoutY="427.0" mnemonicParsing="false" onAction="#startButton" prefHeight="42.0" prefWidth="175.0" stylesheets="@../img/style.css" text="Iniciar" textFill="WHITE">
+            <ChoiceBox fx:id="enlaceBox" layoutX="355.0" layoutY="413.0" onDragDetected="#enlaceList" prefHeight="42.0" prefWidth="194.0" stylesheets="@../img/style.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ChoiceBox>
+            <Button fx:id="iniciar" layoutX="364.0" layoutY="494.0" mnemonicParsing="false" onAction="#startButton" prefHeight="42.0" prefWidth="175.0" stylesheets="@../img/style.css" text="Iniciar" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
